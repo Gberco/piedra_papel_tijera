@@ -15,14 +15,29 @@
     {
         var eleccion;
         
-        eleccion = prompt('Elije Piedra, Papel, o Tijera', 'escribe aqui' );
+        
+        try{
+        do 
+        { 
+             eleccion = prompt('Elije Piedra, Papel, o Tijera', 'escribe aqui' );
+             if( eleccion.toLowerCase() == 'piedra' || eleccion.toLowerCase() == 'papel' || eleccion.toLowerCase() == 'tijera' ){
+                 return eleccion.toLowerCase();
+                 break;
+             } else {
+                 alert('Entrada invalida');
+             } // fin del else
+        } while ( eleccion.toLowerCase() != 'piedra' || eleccion.toLowerCase() != 'papel' || eleccion.toLowerCase() != 'tijera' );
+        } catch(err){
+            alert(err.message);
+        }
+        /*
         if( eleccion.toLowerCase() == 'piedra' || eleccion.toLowerCase() == 'papel' || eleccion.toLowerCase() == 'tijera' )
         { 
             return eleccion.toLowerCase(); 
         } else {
             alert( 'Por favor haz una seleccion valida!, se selecciono automaticamente papel');
             return 'papel';
-        }
+        }*/
     }
     
     //funcion jugador computadora que devuelve  como resultado piedra, papel o tijera
@@ -54,7 +69,7 @@
     function playRound ()
     {
         const computerSelection = computerPlay();
-        const  playerSelection = playerSelects();
+        const playerSelection = playerSelects();
 
         // piedra -> tijera --> gana piedra
         // piedra -> papel --> gana papel
