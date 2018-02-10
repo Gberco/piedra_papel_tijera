@@ -1,0 +1,117 @@
+<script>
+    
+//    var playerSelection = playerSelects();
+  //  var computerSelection = computerPlay();
+    var puntuacionComputadora = 0;
+    var puntuacionJugador = 0;
+    
+    //retorna un numerlo aleatorio entre 0 y 2 para poder usar en el juego
+    function numeroAleatorio()
+    {
+        return Math.floor(Math.random()* (3));
+    }
+    
+    function playerSelects()
+    {
+        var eleccion;
+        
+        eleccion = prompt('Elije Piedra, Papel, o Tijera', 'escribe aqui' );
+        if( eleccion.toLowerCase() == 'piedra' || eleccion.toLowerCase() == 'papel' || eleccion.toLowerCase() == 'tijera' )
+        { 
+            return eleccion.toLowerCase(); 
+        } else {
+            alert( 'Por favor haz una seleccion valida!, se selecciono automaticamente papel');
+            return 'papel';
+        }
+    }
+    
+    //funcion jugador computadora que devuelve  como resultado piedra, papel o tijera
+    function computerPlay()
+    {
+        var seleccion = 'Sin valor';
+        randomNumber = numeroAleatorio();
+        //si pasa algo devuelve piedra, papel o tijera
+        switch(randomNumber)
+        {
+            case 0:
+                seleccion = 'piedra';
+                break;
+            case 1:
+                seleccion = 'papel';
+                break;
+            case 2:
+               seleccion = 'tijera';
+                break;
+            default:
+                seleccion = 'numero invalido';
+                break;
+        }
+        return seleccion;
+        
+    } // fin de computerPlay
+    
+    //funcion jugar, devuelve ganador
+    function playRound ()
+    {
+        const computerSelection = computerPlay();
+        const  playerSelection = playerSelects();
+
+        // piedra -> tijera --> gana piedra
+        // piedra -> papel --> gana papel
+        // tijera -> papel --> gana tijera
+        // piedra -- piedra --> empate
+        // papel -- papel --> empate
+        // tijera -- tijera --> empate
+        
+        if ( computerSelection == 'piedra' &&  (playerSelection == 'tijera' ))
+            {
+                console.log('Perdiste la piedra le gana a la tijera');
+                puntuacionComputadora++;
+            } else if (computerSelection == 'piedra' && playerSelection == 'papel' )    {
+                    console.log('ganaste, el papel le gana a la tijera');
+                    puntuacionJugador++;
+                } else if (computerSelection == 'tijera' && playerSelection == 'papel') {
+                    console.log('Perdiste la tijera le gana al papel');
+                    puntuacionComputadora++;
+                } else if (computerSelection == 'tijera' && playerSelection == 'piedra') {
+                    console.log('Ganaste la piedra le gana a la tijera');
+                    puntuacionJugador++;
+                } else if ( computerSelection == 'papel' && playerSelection == 'piedra') {
+                    console.log('Perdiste el papel le gana a la piedra');
+                    puntuacionComputadora++;
+                } else if (computerSelection ==  'papel' && playerSelection == 'tijera') {
+                    console.log('Ganaste la tijera le gana al papel');
+                    puntuacionJugador++;
+                } else if ( computerSelection == playerSelection )
+                    { console.log( 'EMPATE'); 
+            } else {
+                console.log('Error 404');
+            }
+        console.log('la computadora saco: ' + computerSelection);
+        console.log('tu eleccion fue: ' + playerSelection);
+    }
+        
+    function game()
+    {
+        // repite 5 juegos
+        for (var i = 0; i < 5; i++ )
+        {
+            //playerSelects();
+            //computerPlay();
+            playRound();
+        } //  fin de for
+        
+        if (puntuacionComputadora > puntuacionJugador )
+            {
+                console.log("gano la computadora, perderdor!");
+            } else if (puntuacionJugador > puntuacionComputadora )
+                {
+                    console.log("ganaste, pero seguro por poco");
+                } else { 
+                console.log("Empate, un misero empate!");
+                }
+    } // fin de funcion Game
+    
+    game();
+    
+</script>
